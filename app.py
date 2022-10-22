@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 from display import display_image, display_text
 
@@ -16,3 +16,8 @@ def hello_world():
     else:
         display_text("hello world")
         DISPLAY_TEXT = True
+
+
+@app.route("/")
+def index():
+    return render_template("index.html")
