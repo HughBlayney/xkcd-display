@@ -28,6 +28,6 @@ result_json = json.loads(result.text)
 
 result = requests.get(result_json["img"])
 
-with open(Path(__file__) / "comic.png", "wb") as f:
+with open(Path(__file__).parent / "comic.png", "wb") as f:
     f.write(result.content)
 
