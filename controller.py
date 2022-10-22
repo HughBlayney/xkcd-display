@@ -1,10 +1,10 @@
 from flask import Flask
 
-from display import display_image, display_alt_text
+from display import display_image, display_text
 
 app = Flask(__name__)
 
-DISPLAY_ALT_TEXT = False
+DISPLAY_TEXT = False
 
 
 @app.route("/flip")
@@ -12,7 +12,7 @@ def hello_world():
     global DISPLAY_ALT_TEXT
     if DISPLAY_ALT_TEXT:
         display_image()
-        DISPLAY_ALT_TEXT = False
+        DISPLAY_TEXT = False
     else:
-        display_alt_text()
-        DISPLAY_ALT_TEXT = True
+        display_text()
+        DISPLAY_TEXT = True
