@@ -14,5 +14,5 @@ def hello_world():
         display_image()
         DISPLAY_TEXT = False
     else:
-        display_text()
+        display_text("hello world")
         DISPLAY_TEXT = True
