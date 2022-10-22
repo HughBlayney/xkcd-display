@@ -9,8 +9,8 @@ DISPLAY_TEXT = False
 
 @app.route("/flip")
 def hello_world():
-    global DISPLAY_ALT_TEXT
-    if DISPLAY_ALT_TEXT:
+    global DISPLAY_TEXT
+    if DISPLAY_TEXT:
         display_image()
         DISPLAY_TEXT = False
     else:
