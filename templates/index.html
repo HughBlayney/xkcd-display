@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        var NGROK_URL = "{{ ngrok_url }}";
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </head>
 
