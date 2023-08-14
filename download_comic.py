@@ -32,38 +32,27 @@ parser.add_argument(
     default="meta.json",
 )
 
-if __name__ == "__main__":
-    args = parser.parse_args()
+def download_comic(
+    comic_number: Optional[int] = None,
+    out_comic_filename: str = "comic.png",
+    out_meta_filename: str = "meta.json",
+):
     """
-    Result looks like:
-    {
-      "month": "10",
-      "num": 2688,
-      "link": "",
-      "year": "2022",
-      "news": "",
-      "safe_title": "Bubble Universes",
-      "transcript": "",
-      "alt": "The theory finally unifies cosmic inflation and regular inflation.",
-      "img": "https://imgs.xkcd.com/comics/bubble_universes.png",
-      "title": "Bubble Universes",
-      "day": "21"
-    }
+    Downloads an xkcd comic and saves it to a file.
     """
-    if args.comic_number is None:
+    if comic_number is None:
         info_url = "https://xkcd.com/info.0.json"
     else:
-        comic_number = int(args.comic_number)
         if comic_number < 0:
             latest_comic_number = json.loads(
                 requests.get("https://xkcd.com/info.0.json").text
             )["num"]
             info_url = (
                 "https://xkcd.com/"
-                + f"{latest_comic_number + args.comic_number}/info.0.json"
+                + f"{latest_comic_number + comic_number}/info.0.json"
             )
         else:
-            info_url = f"https://xkcd.com/{args.comic_number}/info.0.json"
+            info_url = f"https://xkcd.com/{comic_number}/info.0.json"
 
     info_response = requests.get(info_url)
 
@@ -71,8 +60,16 @@ if __name__ == "__main__":
 
     comic_image = requests.get(info_json["img"])
 
-    with open(Path(__file__).parent / args.out_comic_filename, "wb") as f:
+    with open(out_comic_filename, "wb") as f:
         f.write(comic_image.content)
     
-    with open(Path(__file__).parent / args.out_meta_filename, "w") as f:
+    with open(out_meta_filename, "w") as f:
         json.dump(info_json, f, indent=2)
+
+if __name__ == "__main__":
+    args = parser.parse_args()
+    download_comic(
+        comic_number=args.comic_number,
+        out_comic_filename=args.out_comic_filename,
+        out_meta_filename=args.out_meta_filename,
+    )
