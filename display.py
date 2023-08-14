@@ -31,7 +31,7 @@ parser.add_argument(
 )
 
 
-def display_image(image_path: str = "./resized.png", refresh_to_white: bool = True):
+def display_image(image_path: str = "./resized.png", refresh_to_white: bool = True, flip_vertical: bool = True):
     epd = epd7in5_V2.EPD()
     epd.init()
 
@@ -40,10 +40,12 @@ def display_image(image_path: str = "./resized.png", refresh_to_white: bool = Tr
         time.sleep(1)
 
     png = Image.open(image_path)
+    if flip_vertical:
+        png = png.transpose(Image.ROTATE_180)
     epd.display(epd.getbuffer(png))
 
 
-def display_text(text: str, refresh_to_white: bool = True):
+def display_text(text: str, refresh_to_white: bool = True, flip_vertical: bool = True):
     epd = epd7in5_V2.EPD()
     epd.init()
 
@@ -71,6 +73,8 @@ def display_text(text: str, refresh_to_white: bool = True):
         text = "\n".join(lines)
         w, h = draw.textsize(text, font=xkcd_font)
     draw.text(((epd.width - w) / 2, (epd.height - h) / 2), text, font=xkcd_font, fill=0)
+    if flip_vertical:
+        Himage = Himage.transpose(Image.ROTATE_180)
     epd.display(epd.getbuffer(Himage))
 
 

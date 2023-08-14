@@ -32,14 +32,7 @@ parser.add_argument(
     default="meta.json",
 )
 
-def download_comic(
-    comic_number: Optional[int] = None,
-    out_comic_filename: str = "comic.png",
-    out_meta_filename: str = "meta.json",
-):
-    """
-    Downloads an xkcd comic and saves it to a file.
-    """
+def get_comic_info_json(comic_number: Optional[int] = None) -> dict:
     if comic_number is None:
         info_url = "https://xkcd.com/info.0.json"
     else:
@@ -57,6 +50,18 @@ def download_comic(
     info_response = requests.get(info_url)
 
     info_json = json.loads(info_response.text)
+
+    return info_json
+
+def download_comic(
+    comic_number: Optional[int] = None,
+    out_comic_filename: str = "comic.png",
+    out_meta_filename: str = "meta.json",
+):
+    """
+    Downloads an xkcd comic and saves it to a file.
+    """
+    info_json = get_comic_info_json(comic_number=comic_number)
 
     comic_image = requests.get(info_json["img"])
 
