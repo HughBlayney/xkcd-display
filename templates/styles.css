@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#remote {
+    width: 250px;
+    height: 500px;
+    background: #2c2c2c;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#remote h1 {
+    color: #fff;
+    margin-bottom: 40px;
+    font-size: 24px;
+}
+
+.button {
+    width: 150px;
+    height: 150px;
+    background-color: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2), 0px 4px 6px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    margin-top: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.button:active {
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
+}
+
+.button.flipping {
+    animation: flipAnim 1.5s infinite;
+}
+
+@keyframes flipAnim {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
