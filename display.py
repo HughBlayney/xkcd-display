@@ -38,7 +38,7 @@ def display_image(image_path: str = "./comic.png", refresh_to_white: bool = True
     if refresh_to_white:
         print("Clear")
         epd.Clear()
-        time.sleep(5)
+        time.sleep(1)
 
     png = Image.open(image_path)
     epd.display(epd.getbuffer(png))
@@ -53,7 +53,7 @@ def display_text(text: str, refresh_to_white: bool = True):
     if refresh_to_white:
         print("Clear")
         epd.Clear()
-        time.sleep(5)
+        time.sleep(1)
     # Center the text
     Himage = Image.new("1", (epd.width, epd.height), 255)  # 255: clear the frame
     draw = ImageDraw.Draw(Himage)
@@ -79,8 +79,8 @@ def display_text(text: str, refresh_to_white: bool = True):
 if __name__ == "__main__":
     args = parser.parse_args()
     if args.comic:
-        display_image(args.image_filename, refresh_to_white=False)
+        display_image(args.image_filename)
     else:
         with open(args.metadata_filename, "r") as metadata_file:
             metadata = json.load(metadata_file)
-        display_text(metadata["alt"], refresh_to_white=False)
+        display_text(metadata["alt"])
