@@ -29,7 +29,6 @@ def read_alt_text():
     return metadata["alt"]
 
 
-
 @app.route("/")
 def index():
     ngrok_url = get_ngrok_url()
