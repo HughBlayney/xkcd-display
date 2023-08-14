@@ -14,7 +14,7 @@ parser.add_argument(
         + "Leave blank for None, which fetches latest comic. "
         + "Enter a negative integer to get the latest-nth comic."
     ),
-    type=Optional[int],
+    type=int,
     default=None,
 )
 
@@ -52,16 +52,18 @@ if __name__ == "__main__":
     """
     if args.comic_number is None:
         info_url = "https://xkcd.com/info.0.json"
-    elif args.comic_number < 0:
-        latest_comic_number = json.loads(
-            requests.get("https://xkcd.com/info.0.json").text
-        )["num"]
-        info_url = (
-            "https://xkcd.com/"
-            + f"{latest_comic_number + args.comic_number}/info.0.json"
-        )
     else:
-        info_url = f"https://xkcd.com/{args.comic_number}/info.0.json"
+        comic_number = int(args.comic_number)
+        if comic_number < 0:
+            latest_comic_number = json.loads(
+                requests.get("https://xkcd.com/info.0.json").text
+            )["num"]
+            info_url = (
+                "https://xkcd.com/"
+                + f"{latest_comic_number + args.comic_number}/info.0.json"
+            )
+        else:
+            info_url = f"https://xkcd.com/{args.comic_number}/info.0.json"
 
     info_response = requests.get(info_url)
 
