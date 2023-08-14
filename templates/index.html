@@ -1,20 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remote Control</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
+        #remote {
+            width: 250px;
+            height: 500px;
+            background: #2c2c2c;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #remote h1 {
+            color: #fff;
+            margin-bottom: 40px;
+            font-size: 24px;
+        }
+
+        .button {
+            width: 150px;
+            height: 150px;
+            background-color: #e6e6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2),
+                        0px 4px 6px rgba(0, 0, 0, 0.2);
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .button:active {
+            box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
+        }
+    </style>
 </head>
-<style>
-
-a {
-    background-color: red;
-    color: white;
-    padding: 100px;
-    display: block;
-    margin: 700px;
-}
-</style>
 <body>
-<a onclick="flip()">switch between alt text and image</a>
-</body>
-
+    <div id="remote">
+        <h1>Remote</h1>
+        <div class="button" onclick="flip()">Flip Image/Text</div>
+    </div>
 
 <script>
     function flip() {
