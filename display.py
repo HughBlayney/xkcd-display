@@ -31,7 +31,7 @@ parser.add_argument(
 )
 
 
-def display_image(image_path: str = "./comic.png", refresh_to_white: bool = True):
+def display_image(image_path: str = "./resized.png", refresh_to_white: bool = True):
     epd = epd7in5_V2.EPD()
     epd.init()
 
