@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 
 from display import display_image, display_text
+import requests
 
 app = Flask(__name__)
 
@@ -16,8 +17,20 @@ def hello_world():
     else:
         display_text("hello world")
         DISPLAY_TEXT = True
+    return jsonify({"message": "Flip successful!"}), 200
 
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    ngrok_url = get_ngrok_url()
+    return render_template("index.html", ngrok_url=ngrok_url)
+
+
+def get_ngrok_url():
+    # Get the ngrok tunnels info
+    tunnels = requests.get("http://localhost:4040/api/tunnels").json()
+
+    # Extract the public URL (assuming you have only one tunnel active)
+    ngrok_url = tunnels['tunnels'][0]['public_url']
+
+    return ngrok_url

@@ -16,11 +16,11 @@ a {
 </body>
 
 
-
-
 <script>
     function flip() {
-        fetch("http://4cbc-2a02-c7c-397b-e200-406d-f59f-da14-7eb9.ngrok.io/flip")
+        fetch("{{ ngrok_url }}/flip", {
+            method: "GET"
+        })
     }
 
 </script>
