@@ -5,16 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remote Control</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </head>
 
 <body>
-    <div id="remote">
-        <h1>Remote</h1>
-        <div class="button" onclick="flip()">Flip Image/Text</div>
-    </div>
+<div id="remote">
+    <h1>Remote</h1>
+    <div class="button" onclick="flip()">Flip Image/Text</div>
+</div>
 
-    <script src="script.js"></script>
 </body>
 
 </html>
