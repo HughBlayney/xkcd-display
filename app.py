@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, render_template, jsonify
 
 from display import display_image, display_text
@@ -15,9 +17,17 @@ def hello_world():
         display_image()
         DISPLAY_TEXT = False
     else:
-        display_text("hello world")
+        alt = read_alt_text()
+        display_text(alt)
         DISPLAY_TEXT = True
     return jsonify({"message": "Flip successful!"}), 200
+
+
+def read_alt_text():
+    with open("meta.json", "r") as metadata_file:
+        metadata = json.load(metadata_file)
+    return metadata["alt"]
+
 
 
 @app.route("/")
@@ -34,3 +44,4 @@ def get_ngrok_url():
     ngrok_url = tunnels['tunnels'][0]['public_url']
 
     return ngrok_url
+
