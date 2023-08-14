@@ -36,7 +36,6 @@ def display_image(image_path: str = "./comic.png", refresh_to_white: bool = True
     epd.init()
 
     if refresh_to_white:
-        print("Clear")
         epd.Clear()
         time.sleep(1)
 
@@ -51,7 +50,6 @@ def display_text(text: str, refresh_to_white: bool = True):
     xkcd_font = ImageFont.truetype("./font.ttf", 24)
 
     if refresh_to_white:
-        print("Clear")
         epd.Clear()
         time.sleep(1)
     # Center the text
