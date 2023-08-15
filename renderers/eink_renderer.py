@@ -9,6 +9,7 @@ from renderers.abstract_renderer import AbstractRenderer
 
 
 class EInkRenderer(AbstractRenderer):
+    @staticmethod
     def display_image(image_path: str = "./resized.png", refresh_to_white: bool = True, flip_vertical: bool = True):
         epd = epd7in5_V2.EPD()
         epd.init()
@@ -22,6 +23,7 @@ class EInkRenderer(AbstractRenderer):
             png = png.transpose(Image.ROTATE_180)
         epd.display(epd.getbuffer(png))
 
+    @staticmethod
     def display_text(text: str, refresh_to_white: bool = True, flip_vertical: bool = True):
         epd = epd7in5_V2.EPD()
         epd.init()

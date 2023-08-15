@@ -15,7 +15,7 @@ class VirtualRenderer(AbstractRenderer):
         image_path = "node_image_streamer/static/display.png"
         text = f"hello world foo + {random()}"
         # Create a new image with the provided text
-        image = Image.new('RGB', (300, 100), color=(73, 109, 137))
+        image = Image.new('RGB', (480, 800), color=(73, 109, 137))
         d = ImageDraw.Draw(image)
         fnt = ImageFont.truetype("/Library/Fonts/Arial.ttf", 15)
         d.text((10, 10), text, font=fnt, fill=(255, 255, 0))
