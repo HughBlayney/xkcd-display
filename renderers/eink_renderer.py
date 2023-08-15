@@ -6,10 +6,10 @@ from abc import ABC
 from PIL import Image, ImageDraw, ImageFont
 from waveshare_epd import epd7in5_V2_fast as epd7in5_V2
 
-from renderers.abstract_renderer import AbstractRenderer
+from renderers.abstract_renderer import AbstractDisplayDriver
 
 
-class EInkRenderer(AbstractRenderer):
+class EInkDisplayDriver(AbstractDisplayDriver):
     @staticmethod
     def display_image(image_path: str = "./resized.png"):
         epd = epd7in5_V2.EPD()

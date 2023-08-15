@@ -1,7 +1,7 @@
 import json
 import subprocess
 
-from display import EInkRenderer
+from display import EInkDisplayDriver
 from download_comic import download_comic, get_comic_info_json
 
 if __name__ == "__main__":
@@ -36,4 +36,4 @@ if __name__ == "__main__":
                 "resized.png",
             ]
         )
-        EInkRenderer.display_image()
+        EInkDisplayDriver.display_image()

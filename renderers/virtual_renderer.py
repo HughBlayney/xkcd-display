@@ -3,12 +3,12 @@ from random import random
 from PIL import Image, ImageDraw, ImageFont
 from decouple import config
 
-from renderers.abstract_renderer import AbstractRenderer
+from renderers.abstract_renderer import AbstractDisplayDriver
 
 IMAGE_PATH = config("XKCD_VIRTUAL_IMAGE_PATH")
 
 
-class VirtualRenderer(AbstractRenderer):
+class VirtualDisplayDriver(AbstractDisplayDriver):
 
     @staticmethod
     def display_image(image_path: str = "./resized.png"):

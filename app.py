@@ -11,9 +11,9 @@ XKCD_ENVIRONMENT = config("XKCD_ENVIRONMENT", default="pi")
 XKCD_REMOTE_WEBSITE = config("XKCD_REMOTE_WEBSITE")
 
 if XKCD_ENVIRONMENT != "pi":
-    from renderers.virtual_renderer import VirtualRenderer as Renderer
+    from renderers.virtual_renderer import VirtualDisplayDriver as Renderer
 else:
-    from renderers.eink_renderer import EInkRenderer as Renderer
+    from renderers.eink_renderer import EInkDisplayDriver as Renderer
 
 
 @app.route("/flip")

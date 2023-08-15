@@ -1,7 +1,7 @@
 import abc
 
 
-class AbstractRenderer(abc.ABC):
+class AbstractDisplayDriver(abc.ABC):
     @staticmethod
     @abc.abstractmethod
     def display_image(image_path: str = "./resized.png"):
