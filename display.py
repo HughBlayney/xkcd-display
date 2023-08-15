@@ -30,10 +30,9 @@ parser.add_argument(
 
 if __name__ == "__main__":
     args = parser.parse_args()
-    renderer = EInkRenderer()
     if args.comic:
-        renderer.display_image(args.image_filename)
+        EInkRenderer.display_image(args.image_filename)
     else:
         with open(args.metadata_filename, "r") as metadata_file:
             metadata = json.load(metadata_file)
-        renderer.display_text(metadata["alt"])
+        EInkRenderer.display_text(metadata["alt"])

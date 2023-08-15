@@ -11,22 +11,20 @@ XKCD_ENVIRONMENT = config("XKCD_ENVIRONMENT", default="pi")
 XKCD_REMOTE_WEBSITE = config("XKCD_REMOTE_WEBSITE")
 
 if XKCD_ENVIRONMENT != "pi":
-    from renderers.virtual_renderer import VirtualRenderer as renderer
+    from renderers.virtual_renderer import VirtualRenderer as Renderer
 else:
-    from renderers.eink_renderer import EInkRenderer as renderer
-
-renderer = renderer()
+    from renderers.eink_renderer import EInkRenderer as Renderer
 
 
 @app.route("/flip")
 def hello_world():
     global DISPLAY_TEXT
     if DISPLAY_TEXT:
-        renderer.display_image()
+        Renderer.display_image()
         DISPLAY_TEXT = False
     else:
         alt = read_alt_text()
-        renderer.display_text(alt)
+        Renderer.display_text(alt)
         DISPLAY_TEXT = True
     return jsonify({"message": "Flip successful!"}), 200
 

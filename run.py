@@ -36,4 +36,4 @@ if __name__ == "__main__":
                 "resized.png",
             ]
         )
-        EInkRenderer().display_image()
+        EInkRenderer.display_image()
