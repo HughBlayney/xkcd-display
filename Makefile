@@ -20,3 +20,9 @@ else
 	@echo "Installing requirements.txt"
 	@venv/bin/pip install -r requirements.txt
 endif
+
+
+.PHONY: run
+run:
+	@echo "Running app"
+	@venv/bin/flask run --host=0.0.0.0 --port=5000
