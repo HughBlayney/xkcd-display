@@ -19,7 +19,7 @@
         #dynamic-image {
             border: 5px solid black;
             box-shadow: 0 8px 13px rgb(0 0 0 / 62%);
-            filter: contrast(0.8)  grayscale(1)
+            filter: contrast(0.8) grayscale(1)
         }
     </style>
 </head>
@@ -28,7 +28,7 @@
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
     var socket = io.connect('<%= SOCKET_URL %>');
-    socket.on('image_updated', function() {
+    socket.on('image_updated', function () {
         var img = document.getElementById('dynamic-image');
         img.src = "/stream?rand=" + Math.random();
     });
