@@ -3,15 +3,22 @@ const http = require('http');
 const socketIo = require('socket.io');
 const fs = require('fs');
 const chokidar = require('chokidar');
+require('dotenv').config();
+
+const SOCKET_URL = process.env.XKCD_SCREEN_SOCKET_URL || "default_url_here";
+const IMAGE_PATH = process.env.XKCD_VIRTUAL_IMAGE_PATH || "default_path_here";
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-const IMAGE_PATH = "static/display.png";
+
+
+app.set('view engine', 'ejs');  // Set the templating engine to ejs
+app.set('views', __dirname);    // Set the views directory
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.render('screen', {SOCKET_URL});  // Pass the SOCKET_URL variable to the client
 });
 
 app.get('/stream', (req, res) => {
@@ -26,9 +33,7 @@ io.on('connection', (socket) => {
     });
 });
 
-// Use chokidar to watch the image file for changes
 const watcher = chokidar.watch(IMAGE_PATH);
-
 watcher.on('change', (path) => {
     console.log(`Image updated: ${path}`);
     io.emit('image_updated');
