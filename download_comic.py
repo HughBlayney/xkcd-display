@@ -39,10 +39,13 @@ def get_comic_info_json(comic_number: Optional[int] = None) -> dict:
     first_comic_url = xkcd_prefix + xkcd_suffix
     first_comic_metadata = requests.get(first_comic_url)
     info_json = json.loads(first_comic_metadata.text)
+    if comic_number is None:
+        return info_json
+
     latest_comic_number = info_json["num"]
 
     # If comic_number is negative, we use modulo arithmetic to get the latest-nth comic
-    comic_number = (latest_comic_number + comic_number) % latest_comic_number if comic_number else ''
+    comic_number = (latest_comic_number + comic_number) % latest_comic_number
     info_url = f"{xkcd_prefix}{comic_number}{xkcd_suffix}"
 
     return json.loads(requests.get(info_url).text)
