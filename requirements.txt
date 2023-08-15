@@ -38,7 +38,6 @@ tomli==2.0.1
 traitlets==5.5.0
 typing-extensions==4.7.1
 urllib3==1.26.12
--e git+https://github.com/waveshare/e-Paper.git@833d3a86be8c8e0463838574fdbece36b1487fa8#egg=waveshare_epd&subdirectory=RaspberryPi_JetsonNano/python
 wcwidth==0.2.5
 Werkzeug==2.2.2
 zipp==3.9.0
