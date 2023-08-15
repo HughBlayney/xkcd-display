@@ -3,14 +3,16 @@ import os
 
 import requests
 from flask import Flask, render_template, jsonify
+from decouple import config
 
 app = Flask(__name__)
 
 DISPLAY_TEXT = False
 
-ENVIRONMENT = os.environ.get("ENVIRONMENT", "development")
+XKCD_ENVIRONMENT = config("XKCD_ENVIRONMENT", default="pi")
+XKCD_REMOTE_WEBSITE = config("XKCD_REMOTE_WEBSITE")
 
-if ENVIRONMENT != "pi":
+if XKCD_ENVIRONMENT != "pi":
     from renderers.virtual_renderer import VirtualRenderer as renderer
 else:
     from renderers.eink_renderer import EInkRenderer as renderer
