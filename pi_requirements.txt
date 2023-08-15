@@ -1,1 +1,3 @@
 -e git+https://github.com/waveshare/e-Paper.git@833d3a86be8c8e0463838574fdbece36b1487fa8#egg=waveshare_epd&subdirectory=RaspberryPi_JetsonNano/python
+RPi.GPIO==0.7.1
+spidev==3.5
