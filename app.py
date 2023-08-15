@@ -1,10 +1,8 @@
 import json
 import os
 
-from flask import Flask, render_template, jsonify
-
-from displays import display_image, display_text, EInkRenderer, VirtualRenderer
 import requests
+from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
@@ -13,9 +11,12 @@ DISPLAY_TEXT = False
 ENVIRONMENT = os.environ.get("ENVIRONMENT", "development")
 
 if ENVIRONMENT != "pi":
-    renderer = EInkRenderer()
+    from renderers.virtual_renderer import VirtualRenderer as renderer
 else:
-    renderer = VirtualRenderer()
+    from renderers.eink_renderer import EInkRenderer as renderer
+
+renderer = renderer()
+
 
 @app.route("/flip")
 def hello_world():
