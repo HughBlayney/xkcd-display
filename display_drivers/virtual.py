@@ -11,6 +11,7 @@ class VirtualDisplayDriver(AbstractDisplayDriver, EPD480x800):
     path = IMAGE_PATH
 
     def display(self, image: Image):
+        # make greyscale
         image.save(self.path)
 
     def display_image(self, image_path: str = "./resized.png"):
