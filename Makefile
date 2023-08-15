@@ -25,4 +25,4 @@ endif
 .PHONY: run
 run:
 	@echo "Running app"
-	@venv/bin/flask run --host=0.0.0.0 --port=5000
+	@venv/bin/gunicorn -w 1 -b 0.0.0.0:5000 app:app --access-logfile -
