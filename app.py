@@ -1,9 +1,7 @@
 import json
-import os
 
-import requests
-from flask import Flask, render_template, jsonify
 from decouple import config
+from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
@@ -42,4 +40,3 @@ def read_alt_text():
 @app.route("/")
 def remote():
     return render_template("index.html")
-

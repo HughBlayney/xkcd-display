@@ -26,3 +26,7 @@ endif
 run:
 	@echo "Running app"
 	@venv/bin/gunicorn -w 1 -b 0.0.0.0:5000 app:app --access-logfile -
+
+virtual-renderer:
+	@echo "Running virtual renderer"
+	@venv/bin/flask run virtual_renderer.py

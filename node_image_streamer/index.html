@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stream Image</title>
+</head>
+<body>
+<img id="dynamic-image" src="/stream" alt="Dynamic Image">
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+    var socket = io.connect('http://localhost:3000');
+    socket.on('image_updated', function() {
+        // Reload the image when an update is detected
+        var img = document.getElementById('dynamic-image');
+        img.src = "/stream?rand=" + Math.random();
+    });
+</script>
+</body>
+</html>
