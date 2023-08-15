@@ -5,7 +5,7 @@ const fs = require('fs');
 const chokidar = require('chokidar');
 require('dotenv').config();
 
-const SOCKET_URL = process.env.XKCD_SCREEN_SOCKET_URL || "default_url_here";
+const SOCKET_URL = "wss://" + process.env.XKCD_SCREEN_SOCKET_URL || "default_url_here";
 const IMAGE_PATH = process.env.XKCD_VIRTUAL_IMAGE_PATH || "default_path_here";
 
 const app = express();

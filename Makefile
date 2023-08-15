@@ -1,3 +1,4 @@
+include .env
 
 .PHONY: restart
 restart:
@@ -6,6 +7,7 @@ restart:
 status:
 	sudo systemctl status myflaskapp.service
 
+export
 
 .PHONY: install
 # if environment is pi, ignore
@@ -27,6 +29,11 @@ run:
 	@echo "Running app"
 	@venv/bin/gunicorn -w 1 -b 0.0.0.0:5000 app:app --access-logfile -
 
-virtual-renderer:
-	@echo "Running virtual renderer"
-	@venv/bin/flask run virtual_renderer.py
+.PHONY: screen
+screen:
+	@echo "Running screen server"
+	@echo "Opening browser to https://$$XKCD_SCREEN_SOCKET_URL"
+	@node server.js & \
+	server_pid=$$!; \
+	open https://$$XKCD_SCREEN_SOCKET_URL; \
+	wait $$server_pid
