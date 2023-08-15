@@ -3,12 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Stream Image</title>
+    <style>
+        /* Make the body full height and remove any default margin and padding */
+        body {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4; /* Just adding a light grey background for clarity */
+        }
+
+        /* Style for the image */
+        #dynamic-image {
+            border: 5px solid black;
+            box-shadow: 0 8px 13px rgb(0 0 0 / 62%)
+        }
+    </style>
 </head>
 <body>
 <img id="dynamic-image" src="/stream" alt="Dynamic Image">
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
-    var socket = io.connect('<%= SOCKET_URL %>');  // Use the provided SOCKET_URL from the server
+    var socket = io.connect('<%= SOCKET_URL %>');
     socket.on('image_updated', function() {
         var img = document.getElementById('dynamic-image');
         img.src = "/stream?rand=" + Math.random();
