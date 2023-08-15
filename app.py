@@ -1,7 +1,12 @@
 import json
+import subprocess
+from random import random
 
+from PIL import Image
 from decouple import config
 from flask import Flask, render_template, jsonify
+
+from download_comic import get_comic_info_json, download_comic
 
 app = Flask(__name__)
 
@@ -30,10 +35,35 @@ def flip():
         DISPLAY_TEXT = True
     return jsonify({"message": "Flip successful!"}), 200
 
+
 @app.route("/random")
-def random():
+def random_comic():
+    number = get_comic_info_json()["num"]
+    print("number: " + str(number))
+    random_comic_number = int(random() * number)
+    print("random_comic_number: " + str(random_comic_number))
+    download_comic(comic_number=random_comic_number, out_comic_filename="comic.png")
+    resize("comic.png", "resized.png")
+    display_driver.display_image("resized.png")
+    return jsonify({"message": "Random comic successful!"}), 200
 
 
+def resize(input_path: str, output_path: str):
+    subprocess.run(
+        [
+            "convert",
+            input_path,
+            "-resize",
+            "800x480",
+            "-background",
+            "white",
+            "-gravity",
+            "center",
+            "-extent",
+            "800x480",
+            output_path,
+        ]
+    )
 
 
 def read_alt_text():
@@ -45,5 +75,3 @@ def read_alt_text():
 @app.route("/")
 def remote():
     return render_template("index.html")
-
-
