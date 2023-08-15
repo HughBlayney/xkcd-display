@@ -37,8 +37,8 @@ def read_alt_text():
 
 
 @app.route("/")
-def index():
-    ngrok_url = get_ngrok_url()
+def remote():
+    ngrok_url = get_ngrok_url()  # TODO: replace with cloudflare tunnel
     return render_template("index.html", ngrok_url=ngrok_url)
 
 
@@ -50,4 +50,3 @@ def get_ngrok_url():
     ngrok_url = tunnels['tunnels'][0]['public_url']
 
     return ngrok_url
-
