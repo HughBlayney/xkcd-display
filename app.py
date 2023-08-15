@@ -1,24 +1,31 @@
 import json
+import os
 
 from flask import Flask, render_template, jsonify
 
-from display import display_image, display_text
+from displays import display_image, display_text, EInkRenderer, VirtualRenderer
 import requests
 
 app = Flask(__name__)
 
 DISPLAY_TEXT = False
 
+ENVIRONMENT = os.environ.get("ENVIRONMENT", "development")
+
+if ENVIRONMENT != "pi":
+    renderer = EInkRenderer()
+else:
+    renderer = VirtualRenderer()
 
 @app.route("/flip")
 def hello_world():
     global DISPLAY_TEXT
     if DISPLAY_TEXT:
-        display_image()
+        renderer.display_image()
         DISPLAY_TEXT = False
     else:
         alt = read_alt_text()
-        display_text(alt)
+        renderer.display_text(alt)
         DISPLAY_TEXT = True
     return jsonify({"message": "Flip successful!"}), 200
 
