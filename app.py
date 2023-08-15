@@ -19,7 +19,7 @@ display_driver = DisplayDriver()
 
 
 @app.route("/flip")
-def hello_world():
+def flip():
     global DISPLAY_TEXT
     if DISPLAY_TEXT:
         display_driver.display_image()
@@ -29,6 +29,11 @@ def hello_world():
         display_driver.display_text(alt)
         DISPLAY_TEXT = True
     return jsonify({"message": "Flip successful!"}), 200
+
+@app.route("/random")
+def random():
+
+
 
 
 def read_alt_text():
@@ -40,3 +45,5 @@ def read_alt_text():
 @app.route("/")
 def remote():
     return render_template("index.html")
+
+

@@ -1,7 +1,7 @@
 import json
 import subprocess
 
-from display import EInkDisplayDriver
+from display_drivers.eink import EInkDisplayDriver
 from download_comic import download_comic, get_comic_info_json
 
 if __name__ == "__main__":
