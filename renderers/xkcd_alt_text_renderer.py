@@ -16,7 +16,7 @@ class AbstractTextRenderer(ABC):
 
 
 class XKCDAltTextRenderer(AbstractTextRenderer):
-    xkcd_font = ImageFont.truetype("./font.ttf", 24)
+    xkcd_font = ImageFont.truetype("static/font.ttf", 24)
 
     def render(self, text: str) -> Image:
         # Center the text

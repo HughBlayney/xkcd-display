@@ -1,19 +1,39 @@
+@font-face {
+    font-family: 'XKCD';
+    src: url('font.ttf') format('truetype');
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'XKCD', sans-serif;
     background-color: #f2f2f2;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    background-image: url('wallpaper.png');
+    background-repeat: repeat; /* This tiles the image */
+    animation: moveBackground 30s linear infinite; /* Adjust 30s to make it faster/slower */
+    backdrop-filter: blur(5px); /* Adjust 5px to control the blur amount */
 }
+
+@keyframes moveBackground {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 726px 0;
+    }
+}
+
 
 #remote {
     width: 250px;
     height: 500px;
     background: #2c2c2c;
     border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 10px solid #070707;
+    box-shadow: 5px 5px 14px rgb(0 0 0 / 62%);
     padding: 20px;
     display: flex;
     flex-direction: column;

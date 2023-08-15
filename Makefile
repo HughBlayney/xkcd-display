@@ -23,6 +23,10 @@ else
 	@venv/bin/pip install -r requirements.txt
 endif
 
+.PHONY: debug
+debug:
+	@echo "Running app in debug mode"
+	@venv/bin/flask run
 
 .PHONY: run
 run:
