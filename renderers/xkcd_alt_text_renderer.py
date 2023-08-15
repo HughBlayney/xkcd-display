@@ -38,3 +38,4 @@ class XKCDAltTextRenderer(AbstractTextRenderer):
             text = "\n".join(lines)
             w, h = draw.textsize(text, font=self.xkcd_font)
         draw.text(((self.width - w) / 2, (self.height - h) / 2), text, font=self.xkcd_font, fill=0)
+        return image
