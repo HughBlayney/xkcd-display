@@ -21,7 +21,7 @@ parser.add_argument(
     "--out-comic-filename",
     help="Filename to save comic image to. Defaults to 'comic.png'.",
     type=str,
-    default="comic.png",
+    default="data/comic.png",
 )
 
 parser.add_argument(
@@ -53,8 +53,8 @@ def get_comic_info_json(comic_number: Optional[int] = None) -> dict:
 
 def download_comic(
         comic_number: Optional[int] = None,
-        out_comic_filename: str = "comic.png",
-        out_meta_filename: str = "meta.json",
+        out_comic_filename: str = "data/comic.png",
+        out_meta_filename: str = "data/meta.json",
 ):
     """
     Downloads an xkcd comic and saves it to a file.

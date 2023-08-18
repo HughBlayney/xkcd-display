@@ -42,8 +42,8 @@ def random_comic():
     print("number: " + str(number))
     random_comic_number = int(random() * number)
     print("random_comic_number: " + str(random_comic_number))
-    download_comic(comic_number=random_comic_number, out_comic_filename="comic.png")
-    resize("comic.png", "resized.png")
+    download_comic(comic_number=random_comic_number, out_comic_filename="data/comic.png")
+    resize("data/comic.png", "resized.png")
     display_driver.display_image("resized.png")
     return jsonify({"message": "Random comic successful!"}), 200
 

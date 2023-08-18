@@ -24,7 +24,7 @@ if __name__ == "__main__":
         subprocess.run(
             [
                 "convert",
-                "comic.png",
+                "data/comic.png",
                 "-resize",
                 "800x480",
                 "-background",
