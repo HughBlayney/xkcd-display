@@ -43,8 +43,8 @@ def random_comic():
     random_comic_number = int(random() * number)
     print("random_comic_number: " + str(random_comic_number))
     download_comic(comic_number=random_comic_number, out_comic_filename="data/comic.png")
-    resize("data/comic.png", "resized.png")
-    display_driver.display_image("resized.png")
+    resize("data/comic.png", "data/resized.png")
+    display_driver.display_image("data/resized.png")
     return jsonify({"message": "Random comic successful!"}), 200
 
 
@@ -67,7 +67,8 @@ def resize(input_path: str, output_path: str):
 
 
 def read_alt_text():
-    with open("meta.json", "r") as metadata_file:
+    print("hello")
+    with open("data/meta.json", "r") as metadata_file:
         metadata = json.load(metadata_file)
     return metadata["alt"]
 

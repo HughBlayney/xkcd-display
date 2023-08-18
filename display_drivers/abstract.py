@@ -3,7 +3,7 @@ import abc
 
 class AbstractDisplayDriver(abc.ABC):
     @abc.abstractmethod
-    def display_image(self, image_path: str = "./resized.png"):
+    def display_image(self, image_path: str = "data/resized.png"):
         raise NotImplementedError
 
     @abc.abstractmethod

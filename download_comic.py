@@ -28,7 +28,7 @@ parser.add_argument(
     "--out-meta-filename",
     help="Filename to save comic metadata to. Defaults to 'meta.json'.",
     type=str,
-    default="meta.json",
+    default="data/meta.json",
 )
 
 

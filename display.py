@@ -19,13 +19,13 @@ parser.add_argument(
     "--image-filename",
     help="The filename of the image to display.",
     type=str,
-    default="resized.png",
+    default="data/resized.png",
 )
 parser.add_argument(
     "--metadata-filename",
     help="The filename of the metadata file from which to get the alt-text.",
     type=str,
-    default="meta.json",
+    default="data/meta.json",
 )
 
 if __name__ == "__main__":
