@@ -137,3 +137,5 @@ node_modules/
 data/*
 
 screen/*
+
+.env.*

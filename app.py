@@ -2,7 +2,6 @@ import json
 import subprocess
 from random import random
 
-from PIL import Image
 from decouple import config
 from flask import Flask, render_template, jsonify
 
