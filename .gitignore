@@ -136,6 +136,8 @@ node_modules/
 
 data/*
 
-screen/*
+_screen/*
 
 .env.*
+
+secrets/*

@@ -31,7 +31,7 @@ debug:
 .PHONY: run
 start:
 	@echo "Running app"
-	@venv/bin/gunicorn -w 1 -b 0.0.0.0:5000 app:app --access-logfile -
+	-@PYTHONPATH=./remote:$$PYTHONPATH venv/bin/gunicorn -w 1 -b 0.0.0.0:5000 remote.app:app --access-logfile - --log-level debug
 
 .PHONY: screen
 screen:

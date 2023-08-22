@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+
+  xkcd_remote:
+    build:
+      context: ./remote
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    restart: always
+    env_file:
+      - .env
+#
+#  xkcd_screen:
+#    build:
+#      context: ./screen_server/screen_server.js
+#      dockerfile: Dockerfile
+#    ports:
+#      - "3000:3000"
+#    restart: always
+
+#
+#  cloudflared:
+#    image: cloudflare/cloudflared:latest
+#    command: tunnel
+#    depends_on:
+#      - xkcd_server
+#    volumes:
+#      - ./path_to_cloudflared_config:/etc/cloudflared
+#    restart: always
