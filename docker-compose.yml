@@ -6,13 +6,29 @@ services:
     build:
       context: ./remote
       dockerfile: Dockerfile
+    image: xkcd_remote
     ports:
       - "5000:5000"
     restart: always
+    volumes:
+      - ./_data:/app/_data
+      - ./_screen:/app/_screen
     env_file:
       - .env
-#
-#  xkcd_screen:
+
+#  screen_server:
+#    build:
+#      context: ./screen_server
+#      dockerfile: Dockerfile
+#    image: screen_server
+#    ports:
+#      - "3000:3000" # Change this if your Node server runs on a different port.
+#    volumes:
+#      - ./screen_server:/usr/src/app # To enable live-reloading, if needed.#
+#    env_file:
+#      - .env
+
+#  xkcd_screen
 #    build:
 #      context: ./screen_server/screen_server.js
 #      dockerfile: Dockerfile

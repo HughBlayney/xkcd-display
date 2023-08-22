@@ -38,4 +38,4 @@ if __name__ == "__main__":
                 "resized.png",
             ]
         )
-        EInkDisplayDriver.display_image()
+        EInkDisplayDriver().display_image()
