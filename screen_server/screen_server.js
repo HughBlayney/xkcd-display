@@ -5,13 +5,16 @@ const fs = require('fs');
 const chokidar = require('chokidar');
 require('dotenv').config();
 
-const SOCKET_URL = "wss://" + process.env.XKCD_SCREEN_SOCKET_URL || "default_url_here";
+const env = process.env.XKCD_ENVIRONMENT || "development"; // default to development if not set
+const protocol = env === "production" ? "wss://" : "ws://";
+
+const baseURL = process.env.XKCD_SCREEN_SOCKET_URL || "default_url_here";
+const SOCKET_URL = protocol + baseURL;
 const IMAGE_PATH = process.env.XKCD_VIRTUAL_IMAGE_PATH || "default_path_here";
 
 const app = express();
 const screen_server = http.createServer(app);
 const io = socketIo(screen_server);
-
 
 
 app.set('view engine', 'ejs');  // Set the templating engine to ejs
@@ -36,7 +39,10 @@ io.on('connection', (socket) => {
 const watcher = chokidar.watch(IMAGE_PATH);
 watcher.on('change', (path) => {
     console.log(`Image updated: ${path}`);
-    io.emit('image_updated');
+    setTimeout(() => {
+            io.emit('image_updated');
+        }, 100
+    );
 });
 
 screen_server.listen(3000, () => {

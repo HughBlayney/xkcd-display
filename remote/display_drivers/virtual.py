@@ -22,4 +22,4 @@ class VirtualDisplayDriver(AbstractDisplayDriver, EPD480x800):
     def display_text(self, text: str):
         image = XKCDAltTextRenderer(width=self.width, height=self.height).render(text)
         self.display(image)
-        print("displaying text at path: " + text)
+        print("displaying text: " + text)

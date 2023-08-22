@@ -14,27 +14,20 @@ services:
       - ./_data:/app/_data
       - ./_screen:/app/_screen
     env_file:
-      - .env
+      - .env.${XKCD_ENVIRONMENT}
 
-#  screen_server:
-#    build:
-#      context: ./screen_server
-#      dockerfile: Dockerfile
-#    image: screen_server
-#    ports:
-#      - "3000:3000" # Change this if your Node server runs on a different port.
-#    volumes:
-#      - ./screen_server:/usr/src/app # To enable live-reloading, if needed.#
-#    env_file:
-#      - .env
-
-#  xkcd_screen
-#    build:
-#      context: ./screen_server/screen_server.js
-#      dockerfile: Dockerfile
-#    ports:
-#      - "3000:3000"
-#    restart: always
+  screen_server:
+    build:
+      context: ./screen_server
+      dockerfile: Dockerfile
+    image: screen_server
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./screen_server:/usr/src/app
+      - ./_screen:/usr/src/app/_screen
+    env_file:
+      - .env.${XKCD_ENVIRONMENT}
 
 #
 #  cloudflared:
