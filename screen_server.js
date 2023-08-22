@@ -9,8 +9,8 @@ const SOCKET_URL = "wss://" + process.env.XKCD_SCREEN_SOCKET_URL || "default_url
 const IMAGE_PATH = process.env.XKCD_VIRTUAL_IMAGE_PATH || "default_path_here";
 
 const app = express();
-const server = http.createServer(app);
-const io = socketIo(server);
+const screen_server = http.createServer(app);
+const io = socketIo(screen_server);
 
 
 
@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');  // Set the templating engine to ejs
 app.set('views', __dirname);    // Set the views directory
 
 app.get('/', (req, res) => {
-    res.render('screen', {SOCKET_URL});  // Pass the SOCKET_URL variable to the client
+    res.render('screen_client', {SOCKET_URL});  // Pass the SOCKET_URL variable to the client
 });
 
 app.get('/stream', (req, res) => {
@@ -39,6 +39,6 @@ watcher.on('change', (path) => {
     io.emit('image_updated');
 });
 
-server.listen(3000, () => {
+screen_server.listen(3000, () => {
     console.log('Node server is running on port 3000');
 });

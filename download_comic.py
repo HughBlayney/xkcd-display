@@ -1,6 +1,5 @@
 import argparse
 import json
-from pathlib import Path
 from typing import Optional
 
 import requests
@@ -10,9 +9,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     "--comic-number",
     help=(
-        "Integer comic number to get. "
-        + "Leave blank for None, which fetches latest comic. "
-        + "Enter a negative integer to get the latest-nth comic."
+            "Integer comic number to get. "
+            + "Leave blank for None, which fetches latest comic. "
+            + "Enter a negative integer to get the latest-nth comic."
     ),
     type=int,
     default=None,
@@ -22,41 +21,40 @@ parser.add_argument(
     "--out-comic-filename",
     help="Filename to save comic image to. Defaults to 'comic.png'.",
     type=str,
-    default="comic.png",
+    default="data/comic.png",
 )
 
 parser.add_argument(
     "--out-meta-filename",
     help="Filename to save comic metadata to. Defaults to 'meta.json'.",
     type=str,
-    default="meta.json",
+    default="data/meta.json",
 )
 
+
 def get_comic_info_json(comic_number: Optional[int] = None) -> dict:
+    xkcd_prefix = "https://xkcd.com/"
+    xkcd_suffix = "/info.0.json"
+
+    first_comic_url = xkcd_prefix + xkcd_suffix
+    first_comic_metadata = requests.get(first_comic_url)
+    info_json = json.loads(first_comic_metadata.text)
     if comic_number is None:
-        info_url = "https://xkcd.com/info.0.json"
-    else:
-        if comic_number < 0:
-            latest_comic_number = json.loads(
-                requests.get("https://xkcd.com/info.0.json").text
-            )["num"]
-            info_url = (
-                "https://xkcd.com/"
-                + f"{latest_comic_number + comic_number}/info.0.json"
-            )
-        else:
-            info_url = f"https://xkcd.com/{comic_number}/info.0.json"
+        return info_json
 
-    info_response = requests.get(info_url)
+    latest_comic_number = info_json["num"]
 
-    info_json = json.loads(info_response.text)
+    # If comic_number is negative, we use modulo arithmetic to get the latest-nth comic
+    comic_number = (latest_comic_number + comic_number) % latest_comic_number
+    info_url = f"{xkcd_prefix}{comic_number}{xkcd_suffix}"
 
-    return info_json
+    return json.loads(requests.get(info_url).text)
+
 
 def download_comic(
-    comic_number: Optional[int] = None,
-    out_comic_filename: str = "comic.png",
-    out_meta_filename: str = "meta.json",
+        comic_number: Optional[int] = None,
+        out_comic_filename: str = "data/comic.png",
+        out_meta_filename: str = "data/meta.json",
 ):
     """
     Downloads an xkcd comic and saves it to a file.
@@ -67,9 +65,10 @@ def download_comic(
 
     with open(out_comic_filename, "wb") as f:
         f.write(comic_image.content)
-    
+
     with open(out_meta_filename, "w") as f:
         json.dump(info_json, f, indent=2)
+
 
 if __name__ == "__main__":
     args = parser.parse_args()

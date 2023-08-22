@@ -37,7 +37,7 @@ start:
 screen:
 	@echo "Running screen server"
 	@echo "Opening browser to https://$$XKCD_SCREEN_SOCKET_URL"
-	@node server.js & \
+	@node screen_server.js & \
 	server_pid=$$!; \
 	open https://$$XKCD_SCREEN_SOCKET_URL; \
 	wait $$server_pid
