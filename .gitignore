@@ -134,7 +134,7 @@ dmypy.json
 
 node_modules/
 
-data/*
+_data/*
 
 _screen/*
 
