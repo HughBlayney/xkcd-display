@@ -1,7 +1,6 @@
 version: '3.7'
 
 services:
-
   xkcd_remote:
     build:
       context: ./remote
@@ -29,12 +28,11 @@ services:
     env_file:
       - .env.${XKCD_ENVIRONMENT}
 
-#
-#  cloudflared:
-#    image: cloudflare/cloudflared:latest
-#    command: tunnel
-#    depends_on:
-#      - xkcd_server
-#    volumes:
-#      - ./path_to_cloudflared_config:/etc/cloudflared
-#    restart: always
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    command: tunnel run ${CLOUDFLARE_TUNNEL_ID}
+    restart: unless-stopped
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+
+  # TODO: Cronjob to run the screen server
