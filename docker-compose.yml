@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  xkcd_remote:
+    build:
+      context: ./remote
+      dockerfile: Dockerfile
+    image: xkcd_remote
+    ports:
+      - "5000:5000"
+    restart: always
+    volumes:
+      - ./_data:/app/_data
+      - ./_screen:/app/_screen
+    env_file:
+      - .env.${XKCD_ENVIRONMENT}
+
+  screen_server:
+    build:
+      context: ./screen_server
+      dockerfile: Dockerfile
+    image: screen_server
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./screen_server:/usr/src/app
+      - ./_screen:/usr/src/app/_screen
+    env_file:
+      - .env.${XKCD_ENVIRONMENT}
+
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    command: tunnel run ${CLOUDFLARE_TUNNEL_ID}
+    restart: unless-stopped
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+
+  # TODO: Cronjob to run the screen server

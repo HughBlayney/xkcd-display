@@ -31,7 +31,7 @@ debug:
 .PHONY: run
 start:
 	@echo "Running app"
-	@venv/bin/gunicorn -w 1 -b 0.0.0.0:5000 app:app --access-logfile -
+	-@PYTHONPATH=./remote:$$PYTHONPATH venv/bin/gunicorn -w 1 -b 0.0.0.0:5000 remote.app:app --access-logfile - --log-level debug
 
 .PHONY: screen
 screen:
@@ -41,3 +41,12 @@ screen:
 	server_pid=$$!; \
 	open https://$$XKCD_SCREEN_SOCKET_URL; \
 	wait $$server_pid
+
+.PHONY: docker-build
+make docker-build:
+	docker-compose build
+
+
+.PHONY: docker-build
+make docker-run:
+	./start-services.sh

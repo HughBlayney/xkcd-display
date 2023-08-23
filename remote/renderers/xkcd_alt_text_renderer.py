@@ -1,5 +1,6 @@
 # abstract
 import abc
+import os
 from abc import ABC
 
 from PIL import Image, ImageDraw, ImageFont
@@ -16,7 +17,9 @@ class AbstractTextRenderer(ABC):
 
 
 class XKCDAltTextRenderer(AbstractTextRenderer):
-    xkcd_font = ImageFont.truetype("static/font.ttf", 24)
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    FONT_PATH = os.path.join(BASE_DIR, '../static/font.ttf')
+    xkcd_font = ImageFont.truetype(FONT_PATH, 24)
 
     def render(self, text: str) -> Image:
         # Center the text

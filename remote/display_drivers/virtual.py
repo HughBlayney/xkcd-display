@@ -14,7 +14,7 @@ class VirtualDisplayDriver(AbstractDisplayDriver, EPD480x800):
         # make greyscale
         image.save(self.path)
 
-    def display_image(self, image_path: str = "data/resized.png"):
+    def display_image(self, image_path: str = "_data/resized.png"):
         image = Image.open(image_path)
         self.display(image)
         print("displaying image at path: " + image_path)
@@ -22,4 +22,4 @@ class VirtualDisplayDriver(AbstractDisplayDriver, EPD480x800):
     def display_text(self, text: str):
         image = XKCDAltTextRenderer(width=self.width, height=self.height).render(text)
         self.display(image)
-        print("displaying text at path: " + text)
+        print("displaying text: " + text)

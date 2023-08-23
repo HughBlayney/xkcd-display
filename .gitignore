@@ -134,8 +134,10 @@ dmypy.json
 
 node_modules/
 
-data/*
+_data/*
 
-screen/*
+_screen/*
 
 .env.*
+
+secrets/*

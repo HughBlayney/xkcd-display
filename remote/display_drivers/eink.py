@@ -18,7 +18,7 @@ class EInkDisplayDriver(AbstractDisplayDriver, EPD480x800):
         image = image.transpose(Image.ROTATE_180)
         self.epd.display(self.epd.getbuffer(image))
 
-    def display_image(self, image_path: str = "data/resized.png"):
+    def display_image(self, image_path: str = "_data/resized.png"):
         png = Image.open(image_path)
         self.display(png)
 

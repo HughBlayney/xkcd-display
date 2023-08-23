@@ -1,7 +1,7 @@
 import argparse
 import json
 
-from renderers.eink_renderer import EInkDisplayDriver
+from display_drivers.eink import EInkDisplayDriver
 
 parser = argparse.ArgumentParser(description="Display an image on the e-Ink Display.")
 image_or_text_group = parser.add_mutually_exclusive_group(required=True)
@@ -19,13 +19,13 @@ parser.add_argument(
     "--image-filename",
     help="The filename of the image to display.",
     type=str,
-    default="data/resized.png",
+    default="_data/resized.png",
 )
 parser.add_argument(
     "--metadata-filename",
     help="The filename of the metadata file from which to get the alt-text.",
     type=str,
-    default="data/meta.json",
+    default="_data/meta.json",
 )
 
 if __name__ == "__main__":

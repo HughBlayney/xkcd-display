@@ -1,12 +1,15 @@
 import json
 import subprocess
 
-from display_drivers.eink import EInkDisplayDriver
-from download_comic import download_comic, get_comic_info_json
+from remote.display_drivers.eink import EInkDisplayDriver
+from remote.download_comic import download_comic, get_comic_info_json
+
+# Crontab is set up to run this script every 5 minutes
+# TODO: make crontab version controlled
 
 if __name__ == "__main__":
     try:
-        with open("data/meta.json") as f:
+        with open("_data/meta.json") as f:
             meta = json.load(f)
         displayed_comic_number = meta.get("num", None)
     except FileNotFoundError:
@@ -23,7 +26,7 @@ if __name__ == "__main__":
         subprocess.run(
             [
                 "convert",
-                "data/comic.png",
+                "_data/comic.png",
                 "-resize",
                 "800x480",
                 "-background",
@@ -35,4 +38,4 @@ if __name__ == "__main__":
                 "resized.png",
             ]
         )
-        EInkDisplayDriver.display_image()
+        EInkDisplayDriver().display_image()

@@ -5,7 +5,7 @@ from random import random
 from decouple import config
 from flask import Flask, render_template, jsonify
 
-from download_comic import get_comic_info_json, download_comic
+from .download_comic import get_comic_info_json, download_comic
 
 app = Flask(__name__)
 
@@ -41,9 +41,9 @@ def random_comic():
     print("number: " + str(number))
     random_comic_number = int(random() * number)
     print("random_comic_number: " + str(random_comic_number))
-    download_comic(comic_number=random_comic_number, out_comic_filename="data/comic.png")
-    resize("data/comic.png", "data/resized.png")
-    display_driver.display_image("data/resized.png")
+    download_comic(comic_number=random_comic_number, out_comic_filename="_data/comic.png")
+    resize("_data/comic.png", "_data/resized.png")
+    display_driver.display_image("_data/resized.png")
     return jsonify({"message": "Random comic successful!"}), 200
 
 
@@ -67,7 +67,7 @@ def resize(input_path: str, output_path: str):
 
 def read_alt_text():
     print("hello")
-    with open("data/meta.json", "r") as metadata_file:
+    with open("_data/meta.json", "r") as metadata_file:
         metadata = json.load(metadata_file)
     return metadata["alt"]
 
