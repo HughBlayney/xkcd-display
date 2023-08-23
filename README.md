@@ -30,3 +30,10 @@ CLOUDFLARE_TUNNEL_TOKEN=[PASTE_TOKEN_HERE]
 
 # Run docker-compose
 
+in .env, set `XKCD_ENVIRONMENT=production`
+
+run `./start-services.sh` - this will start 
+
+- the website
+- the tunnel
+- the virtual screen
