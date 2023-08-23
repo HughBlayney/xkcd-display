@@ -41,3 +41,12 @@ screen:
 	server_pid=$$!; \
 	open https://$$XKCD_SCREEN_SOCKET_URL; \
 	wait $$server_pid
+
+.PHONY: docker-build
+make docker-build:
+	docker-compose build
+
+
+.PHONY: docker-build
+make docker-run:
+	./start-services.sh
